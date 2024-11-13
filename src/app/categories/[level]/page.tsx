@@ -1,16 +1,22 @@
 import React from 'react';
-import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { ArrowRight, BookOpen, Brain, Pencil, VolumeX, ChevronLeft, Home } from 'lucide-react';
+import { ArrowRight, BookOpen, Brain, Pencil, VolumeX } from 'lucide-react';
 import Navigation from '@/components/layout/navigationBar/Navigation';
 
+// Define types for the page params
+type CategoryParams = {
+    level: string;
+};
 
-export default async function CategoryPage({ params }: { params: { level: 'beginner' | 'intermediate' | 'advanced' } }) {
-    const level = params.level.toLowerCase() as 'beginner' | 'intermediate' | 'advanced';
+// Define the component props type
+type PageProps = {
+    params: CategoryParams;
+    searchParams: { [key: string]: string | string[] | undefined };
+};
+
+const CategoryPage = async ({ params }: PageProps) => {
+    const level = params.level.toLowerCase();
     const types = ["Reading", "Multiple Choice", "One word", "Vocabulary"];
-   
-
-  
 
     const getIcon = (type: string) => {
         switch (type.toLowerCase()) {
@@ -27,48 +33,41 @@ export default async function CategoryPage({ params }: { params: { level: 'begin
         }
     };
 
-    const getColors = (type: string) => {
+    const getColors = (type: string): { background: string } => {
         switch (type.toLowerCase()) {
             case 'reading':
                 return { 
-                    background: 'bg-blue-600 hover:bg-blue-700', 
-                    stroke: 'stroke-blue-300' 
+                    background: 'bg-blue-600 hover:bg-blue-700'
                 };
             case 'multiple choice':
                 return { 
-                    background: 'bg-emerald-600 hover:bg-emerald-700', 
-                    stroke: 'stroke-emerald-300' 
+                    background: 'bg-emerald-600 hover:bg-emerald-700'
                 };
             case 'one word':
                 return { 
-                    background: 'bg-violet-600 hover:bg-violet-700', 
-                    stroke: 'stroke-violet-300' 
+                    background: 'bg-violet-600 hover:bg-violet-700'
                 };
             case 'vocabulary':
                 return { 
-                    background: 'bg-orange-600 hover:bg-orange-700', 
-                    stroke: 'stroke-orange-300' 
+                    background: 'bg-orange-600 hover:bg-orange-700'
                 };
             default:
                 return { 
-                    background: 'bg-gray-600', 
-                    stroke: 'stroke-gray-300' 
+                    background: 'bg-gray-600'
                 };
         }
     };
 
     return (
-        <main className="min-h-screen  flex flex-col bg-gradient-to-b from-primary to-primary-foreground">
-            {/* Navigation Bar */}
-           <Navigation level={params.level} />
+        <main className="min-h-screen flex flex-col bg-gradient-to-b from-primary to-primary-foreground">
+            <Navigation level={params.level} />
 
-            {/* Main Content */}
             <div className="flex flex-col items-center justify-center flex-1 mt-10">
                 <h1 className="mb-12 text-4xl font-bold capitalize text-center text-white">{level} Level Quizzes</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
                     {types.map((type, i) => {
-                        const { background, stroke } = getColors(type);
+                        const { background } = getColors(type);
                         return (
                             <Link
                                 key={i}
@@ -94,4 +93,6 @@ export default async function CategoryPage({ params }: { params: { level: 'begin
             </div>
         </main>
     );
-}
+};
+
+export default CategoryPage;

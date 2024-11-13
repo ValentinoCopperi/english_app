@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ProgressDemo = ( {per , type} : Props ) => {
-	const [progress, setProgress] = React.useState(per);
+	const [progress] = React.useState(per);
 
     const getColors = (type: ExerciseType): { bg: string, hover: string, text: string } => {
         switch (type) {

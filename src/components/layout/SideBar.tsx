@@ -3,13 +3,11 @@
 import React, { useState } from 'react';
 import { Home, ChevronDown, ChevronRight, BookOpen, Brain, Pencil, VolumeX, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
-import { useStore } from '@/store/ui/sideBar';
 
 
 
 export const SideBar = ( ) => {
 
-  const { state } = useStore();
 
 
   const [expandedLevel, setExpandedLevel] = useState<string | null>(null);

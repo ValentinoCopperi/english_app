@@ -2,7 +2,7 @@ import { ExerciseLevel, ExerciseType, MultilpleChoiceTopics, OneWordTopic, Readi
 import { Progress, VocabularyTopic } from '@/interface/progress/interface';
 import Cookies from 'js-cookie';
 
-
+// Define a type that maps exercise types to their topic types
 type TopicType<T extends ExerciseType> = 
   T extends 'multiplechoice' ? MultilpleChoiceTopics :
   T extends 'reading' ? ReadingTopics :
@@ -10,8 +10,23 @@ type TopicType<T extends ExerciseType> =
   T extends 'vocabulary' ? VocabularyTopic :
   never;
 
+// Define a type for the exercise data structure
+type ExerciseData<T extends ExerciseType> = {
+  [K in TopicType<T>]: number;
+};
 
-  
+// Helper function to safely access and update nested properties
+function updateNestedProperty<T extends ExerciseType>(
+  obj: Progress,
+  level: ExerciseLevel,
+  type: T,
+  topic: TopicType<T>,
+  value: number
+): void {
+  const exerciseData = obj[level][type] as ExerciseData<T>;
+  exerciseData[topic] = value;
+}
+
 export const updateProgress = <T extends ExerciseType>(
   per: number,
   level: ExerciseLevel,
@@ -114,23 +129,15 @@ export const updateProgress = <T extends ExerciseType>(
       }
     };
 
-    (initialProgress[level][type] as any)[topic] = per;
+    updateNestedProperty(initialProgress, level, type, topic, per);
     Cookies.set('progress', JSON.stringify(initialProgress), { expires: 8 });
-
-    console.log(per)
+    console.log(per);
   } else {
     const currentProgress: Progress = JSON.parse(progress);
+    const value = per !== 0 ? per : 0;
     
-    if (per !== 0) {
-      (currentProgress[level][type] as any)[topic] = per;
-    } else {
-      (currentProgress[level][type] as any)[topic] = 0;
-    }
-
+    updateNestedProperty(currentProgress, level, type, topic, value);
     Cookies.set('progress', JSON.stringify(currentProgress), { expires: 8 });
-
-    console.log(per)
-
+    console.log(per);
   }
-
 };

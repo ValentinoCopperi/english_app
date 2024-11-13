@@ -3,15 +3,13 @@
 "use client"
 
 import React from 'react';
-import { Instagram, Facebook, Twitter, Youtube, Github, MenuIcon, GraduationCap } from 'lucide-react';
-import { useStore } from '@/store/ui/sideBar';
+import { Instagram, Facebook, Twitter, Youtube, Github,GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 
 
 
 export const NavBar = ( ) => {
 
-  const { toggleSideMenu } = useStore();
 
   const socialLinks = [
     {

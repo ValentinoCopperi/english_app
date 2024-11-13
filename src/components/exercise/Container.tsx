@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/exercise/ui/RadioGroup"
 import { Label } from "@/components/exercise/ui/Label"
 import { Button } from "@/components/exercise/ui/Button"
 import Results from './results/Results'
-import { Exercise, ExerciseType } from '@/interface/exercises/interface'
+import { Exercise } from '@/interface/exercises/interface'
 import { updateProgress } from '@/utils/progress/updateProgress'
 import { AllTopics } from '@/interface/progress/interface'
 import CountdownTimerDiv from './timer/Timer'

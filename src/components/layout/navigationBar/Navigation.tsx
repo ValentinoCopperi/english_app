@@ -1,4 +1,4 @@
-import { ExerciseLevel, ExerciseType } from '@/interface/exercises/interface';
+import {  ExerciseType } from '@/interface/exercises/interface';
 import { Home } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
@@ -7,7 +7,7 @@ import React from 'react'
 interface Props {
     type?: ExerciseType,
     topic?: string,
-    level: ExerciseLevel
+    level: string
 }
 
 

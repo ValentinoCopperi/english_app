@@ -1,9 +1,9 @@
 import TitleAndIcon from '@/components/exercise/titleAndIcon/TitleAndIcon';
 import Navigation from '@/components/layout/navigationBar/Navigation';
 import ProgressDemo from '@/components/progress/Progress';
-import { ExerciseLevel, ExerciseType } from '@/interface/exercises/interface';
-import { AllTopics, Progress } from '@/interface/progress/interface';
-import { ArrowRight, BookOpen, Brain, Pencil, VolumeX } from 'lucide-react';
+import {  ExerciseType } from '@/interface/exercises/interface';
+import { AllTopics,  } from '@/interface/progress/interface';
+import { ArrowRight} from 'lucide-react';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import React from 'react';
